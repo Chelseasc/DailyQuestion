@@ -137,3 +137,37 @@ let numbers = [6,7,8,9,10];
 let num2 = Array.from(numbers); // [6,7,8,9,10]
 // 迭代：
 let evens = Array.from(numbers, x => (x % 2 === 0)); // [true, false, true, false, true]
+
+// Array.of() 根据传入的参数 创建新数组/复制数组
+// 创建：
+let arr1 = Array.of(1,2,3); // 相当于let arr1 = [1,2,3]
+// 复制：
+let arr2 = Array.of(...arr1); // 和Array.from()一样。[1,2,3]
+
+// fill()  用静态值填充数组
+let arr = Array.of(1,2,3,4); // [1,2,3,4]
+arr.fill(0); // [0,0,0,0]
+arr.fill(2,1); // fill(填充值，开始索引) [0,0,2,2]
+arr.fill(1,1,3); // fill(填充值，开始索引，结束索引) [0,1,1,1]
+// 常见用途：
+let arr = Array(6).fill(0);  // [0,0,0,0,0,0]
+
+
+// 排序元素
+// reverse() 反序输出数组
+// sort() 根据字符串排序
+let arr = [15,14,13,11,10,9,5,3,1];
+arr.sort(); // [1,10,11,13,14,15,3,5,9]
+// 优化：
+function compare(a, b) {
+    if(a < b) {
+        return -1;
+    }
+    if(a > b) {
+        return 1;
+    }
+    return 0;
+}
+arr.sort(compare); // 重点
+
+
