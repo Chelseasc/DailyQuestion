@@ -170,4 +170,21 @@ function compare(a, b) {
 }
 arr.sort(compare); // 重点
 
+// 对对象类型的数组排序
+const friends = [
+    {name: 'sc1', age: 18},
+    {name: 'sc2', age: 19},
+    {name: 'sc3', age: 20},
+];
+function comparePerson(a, b) { // 根据年龄排
+    if(a.age > b.age) {
+        return -1;
+    }
+    if(a.age < b.age) {
+        return 1;
+    }
+    return 0;
+}
+console.log(friends.sort(comparePerson));
+
 
