@@ -66,3 +66,17 @@ class Stack {
         return objString;
     }
 }
+
+
+// 保护数据结构内部元素
+class Stack {
+    constructor() {
+        this.count = 0;
+        this.items = {};
+    }
+}
+// 所谓“保护”：只有暴露出来的方法才能修改内部结构
+const stack = new Stack();
+console.log(Object.getOwnPropertyNames(stack)); // ["count", "items"]
+console.log(Object.keys(stack)); // ["count", "items"]
+// 以上getOwnPropertyNames和keys可以输出结果，说明count和items属性是公开的

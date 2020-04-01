@@ -185,6 +185,6 @@ function comparePerson(a, b) { // 根据年龄排
     }
     return 0;
 }
-console.log(friends.sort(comparePerson));
+console.log(friends.sort(comparePerson));// [{name: "sc3", age: 20},{name: "sc2", age: 19},{name: "sc1", age: 18}]
 
 
