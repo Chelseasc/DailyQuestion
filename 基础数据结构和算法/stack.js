@@ -68,7 +68,7 @@ class Stack {
 }
 
 
-// 保护数据结构内部元素
+// 保护数据结构内部元素 即 实现私有属性的方法
 class Stack {
     constructor() {
         this.count = 0;
@@ -80,3 +80,59 @@ const stack = new Stack();
 console.log(Object.getOwnPropertyNames(stack)); // ["count", "items"]
 console.log(Object.keys(stack)); // ["count", "items"]
 // 以上getOwnPropertyNames和keys可以输出结果，说明count和items属性是公开的
+// ES6创建类（class）是基于原型（非基于函数）的，这种方式不能创建私有属性/变量。
+
+// 实现私有属性的方法：
+// 方法一:约定：下划线命名来标记属性为私有属性(不能保护数据，仅仅是约定)
+class Stack {
+    constructor() {
+        this._count = 0;
+        this._items = {};
+    }
+}
+// 方法二：Symbol 
+// 不过这种方法也是假私有属性，因为ES6的Object.getOwnPropertySymbols可以
+// 取到类里声明的所有Symbols属性
+const _items = Symbol('stackItems');
+class Stack {
+    constructor() {
+        this[_items] = []; // 正常的写this.items
+    }
+}
+// 方法三：WeakMap:可以确保属性是私有的，但扩展该类时无法继承私有属性
+const items = new WeekMap();
+class Stack {
+    constructor() {
+        items.set(this, []); // 这里数组代表栈
+    }
+    push(element) {
+        const s = items.get(this);
+        s.push(element);
+    }
+    pop() {
+        const s = items.get(this);
+        const r = s.pop();
+        return r;
+    }
+}
+
+
+// 用栈解决问题
+// 进制转化
+function decimaToBinary(decNum) {
+    const remStack = new Stack();
+    let num = decNum;
+    let rem;
+    let binaryString = '';
+
+    while(num > 0) {
+        rem = Math.floor(num % 2);
+        remStack.push(rem);
+        num = Math.floor(num / 2);
+    }
+    while(!remStack.isEmpty()) {
+        binaryString += remStack.pop().toString();
+    }
+    return binaryString;
+}
+decimaToBinary(100); // "1100100"
