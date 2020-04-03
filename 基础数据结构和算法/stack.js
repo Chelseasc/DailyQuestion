@@ -126,7 +126,8 @@ function decimaToBinary(decNum) {
     let binaryString = '';
 
     while(num > 0) {
-        rem = Math.floor(num % 2);
+        // Math.floor()返回小于或等于一个给定数字的最大整数 向下取整；Math.ceil向上取整
+        rem = Math.floor(num % 2); 
         remStack.push(rem);
         num = Math.floor(num / 2);
     }
@@ -136,3 +137,24 @@ function decimaToBinary(decNum) {
     return binaryString;
 }
 decimaToBinary(100); // "1100100"
+
+
+
+
+// 十进制转任意进制
+// 12%2=0,12/2=6; 6%2=0,6/2=3; 3%2=1,3/2~1; 1%2=1,1/2=0; 
+function decimaToNHex(decNum, n) {
+    let rem;
+    let division = decNum;
+    let result = '';
+    let stack = new Stack();
+    while(division > 0) {
+        rem = Math.floor(decNum % n);
+        stack.push(rem);
+        division = Math.floor(division / n);
+    }
+    while(!stack.isEmpty()) {
+        result += stack.pop().toString();
+    }
+    return result;
+}
