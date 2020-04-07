@@ -84,3 +84,26 @@ var reverse = function(x) {
     return result > max || result < min ? 0 : result 
 };
 
+// 13. 罗马数字转整数
+var romanToInt = function(s) {
+    const hash = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000  
+    }
+    let result = 0;
+    for(let i = 0; i < s.length; i++) {
+        hash[s[i]] < hash[s[i+1]] ? result -= hash[s[i]] : result += hash[s[i]];
+    }
+    if(result < 0) {
+        return 0;
+    } else if (result > 3999) {
+        return 3999;
+    } else {
+        return result;
+    }
+};
