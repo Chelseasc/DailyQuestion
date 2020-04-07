@@ -45,3 +45,42 @@ var twoSum = function(nums, target) {
         }
     }
 };
+
+// 整数反转
+// 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
+// 输入: 123   输出: 321
+// 输入: -123  输出: -321
+// 输入: 120   输出: 21
+// 注意:
+// 假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−231,  231 − 1]。
+// 请根据这个假设，如果反转后整数溢出那么就返回 0。
+var reverse = function(x) {
+    if(x === 0 || x < Math.pow(-2, 31) || x > Math.pow(2, 31) - 1) return 0;
+    let x1 = x;
+    if(x < 0) {
+        x1 = -x;
+    }
+    let arr = [];
+    while(x1>0) {
+        let rem = x1 % 10;
+        arr.push(rem);
+        x1 = Math.floor(x1 / 10);
+    }
+    let result = '';
+    for(let i = arr.length; i > 0; i--) {
+        result += arr.shift();
+    }
+    if(result > Math.pow(2, 31)-1 || result < Math.pow(-2, 31)) {
+        result = 0;
+    }
+    return x < 0 ? -result : result;
+};
+var reverse = function(x) {
+    const border = 2**31
+    const max = border - 1
+    const min = -border
+
+    const result = (x > 0 ? 1 : -1) * String(x).split('').filter(x => x !== '-').reverse().join('')
+    return result > max || result < min ? 0 : result 
+};
+
