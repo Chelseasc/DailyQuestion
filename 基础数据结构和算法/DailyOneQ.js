@@ -123,3 +123,24 @@ var longestCommonPrefix = function(strs) {
     }
     return result;
 };
+
+var isValid = function(s) {
+    let s1 = s;
+    var hash = {'}': '{', ']': '[', ')': '('};
+    var stk = new Array();
+    var stk_len = 0;
+    for (let i = 0; i < s.length; ++i) {
+      let ss = s[i];
+      if (ss == '{' || ss == '[' || ss == '(') {
+        stk[stk_len] = ss;
+        stk_len += 1;
+      } else {
+        if (stk_len == 0) return false;
+        if (stk[stk_len-1] != hash[ss]) {
+          return false;
+        }
+        --stk_len;
+      }
+    }
+    return stk_len == 0;
+  };
