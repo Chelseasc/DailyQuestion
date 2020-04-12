@@ -124,8 +124,13 @@ var longestCommonPrefix = function(strs) {
     return result;
 };
 
+// 20. 有效的括号
+// 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
+// 有效字符串需满足：
+// 左括号必须用相同类型的右括号闭合。
+// 左括号必须以正确的顺序闭合。
+// 注意空字符串可被认为是有效字符串。
 var isValid = function(s) {
-    let s1 = s;
     var hash = {'}': '{', ']': '[', ')': '('};
     var stk = new Array();
     var stk_len = 0;
@@ -143,4 +148,52 @@ var isValid = function(s) {
       }
     }
     return stk_len == 0;
+  };
+
+// 21.合并两个有序链表
+// 将两个升序链表合并为一个新的升序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 
+// 示例：
+// 输入：1->2->4, 1->3->4
+// 输出：1->1->2->3->4->4
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+var mergeTwoLists = function(l1, l2) {
+    if(!l1) return l2;
+    if(!l2) return l1;
+    if(l1.val < l2.val) {
+      l1.next = mergeTwoLists(l1.next, l2);
+      return l1;
+    } else {
+      l2.next = mergeTwoLists(l1, l2.next);
+      return l2;
+    }
+  };
+
+// 26. 删除排序数组中的重复项
+// 给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。
+// 不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
+/* 
+ * 给定 nums = [0,0,1,1,1,2,2,3,3,4],
+ * 函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。
+ * 你不需要考虑数组中超出新长度后面的元素。
+*/
+var removeDuplicates = function(nums) {
+    // nums =  Array.from(new Set(nums));
+    // return nums.length;
+    let arr = nums;
+    let compareTemp = nums[0];
+    for(let i = 1; i < nums.length;) {
+      if(nums[i] === compareTemp) {
+        nums.splice(i, 1);
+      } else {
+        compareTemp = nums[i];
+        i++;
+      }
+    }
+    return nums.length;
   };
