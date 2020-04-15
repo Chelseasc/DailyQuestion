@@ -197,3 +197,65 @@ var removeDuplicates = function(nums) {
     }
     return nums.length;
   };
+
+
+// 27. 移除元素
+// 给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。
+// 不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。
+// 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
+  var removeElement = function(nums, val) { // O(n^2)
+    for(let i = 0; i < nums.length;) {
+      if(nums[i] === val) {
+        nums.splice(i, 1);
+      } else {
+        i++;
+      }
+    }
+    return nums.length;
+  };
+// 双指针法：时间复杂度O(n)，空间复杂度O(1)
+var removeElement = function(nums, val) {
+    let j = 0;
+    for(let i = 0; i < nums.length; i++) {
+      if(nums[i] !== val) {
+        nums[j++] = nums[i];
+      }
+    }
+    return j;
+  };
+
+// 28. 实现 strStr()
+// 实现 strStr() 函数。
+// 给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。
+var strStr = function(haystack, needle) {
+    return haystack.indexOf(needle) ;
+  };
+//   Emmmmmm，这题想考察的应该就是indexOf的实现，像上面这么写太投机取巧了不是😄
+var strStr = function(haystack, needle) {
+    if(haystack === needle || needle === '') return 0;
+    for(let i = 0; i < haystack.length; i++) {
+      if(haystack[i] === needle[0]) {
+        if(haystack.substr(i, needle.length) === needle) return i;
+      }
+    }
+    return -1;
+  };
+//   如果连substr/substring都不让用呢：
+var strStr = function(haystack, needle) {
+    if(haystack === needle || needle === '') return 0;
+    
+    for(let i = 0; i < haystack.length; i++) {
+      let flag;
+      if(haystack[i] === needle[0]) {
+        flag = true;
+        for(let j = 0; j < needle.length; j++) {
+          if(haystack[i+j] !== needle[j]) {
+            flag = false;
+            break;
+          }
+        }
+        if(flag) return i;
+      }
+    }
+    return -1;
+  };
